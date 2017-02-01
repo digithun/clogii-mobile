@@ -24,7 +24,10 @@
 
 'use strict';
 
-var F8App = require('F8App');
+import { ApolloProvider } from 'react-apollo';
+import client from './store/apollo';
+
+var App = require('App');
 var FacebookSDK = require('FacebookSDK');
 var Parse = require('parse/react-native');
 var React = require('React');
@@ -34,14 +37,15 @@ var { Provider } = require('react-redux');
 var apollo = require('./store/apollo');
 var configureStore = require('./store/configureStore');
 
-var {serverURL} = require('./env');
+const env = require('./env');
+let {serverURL} = env;
 
 import moment from 'moment';
 import 'moment/locale/th';
 
 function setup(): React.Component {
   console.disableYellowBox = true;
-  Parse.initialize('oss-f8-app-2016');
+  Parse.initialize(env.parse.appID, env.parse.javascriptKey);
   Parse.serverURL = `${serverURL}/parse`;
 
   FacebookSDK.init();
@@ -63,9 +67,9 @@ function setup(): React.Component {
         return null;
       }
       return (
-        <Provider store={this.state.store} client={this.state.client}>
-          <F8App/>
-        </Provider>
+        <ApolloProvider store={this.state.store} client={this.state.client}>
+          <App/>
+        </ApolloProvider>
       );
     }
   }

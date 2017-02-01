@@ -12,10 +12,11 @@ import {connect} from 'react-redux';
 import SecureContainer from '../components/SecureContainer';
 import NavBar from '../components/NavBar';
 
-import {styles as commonStyles, colors as commonColors} from '../common';
+import {styles as commonStyles} from '../common';
+import {colors as commonColors} from '../../../common/styles';
 
 import {changeEmail} from '../../../actions/changeProfile';
-import ModalSpinner from '../components/ModalSpinner';
+import ModalSpinner from '../../../common/ModalSpinner';
 
 class ChangeEmailScreen extends React.Component {
   constructor(...args) {
@@ -33,7 +34,7 @@ class ChangeEmailScreen extends React.Component {
       <ModalSpinner visible={this.state.saving}/>
       <NavBar
         title="เปลี่ยน Email"
-        onLeftPress={this.props.onBackPress}
+        onBackPress={this.props.onBackPress}
         />
       <SecureContainer onCheck={() => Promise.resolve()}>
         <View>

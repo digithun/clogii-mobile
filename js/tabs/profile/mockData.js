@@ -31,35 +31,39 @@ export const activity = [{
 export const myClogs = [
   {
     title: 'Richy Rich! รวยมากนะ! รู้ยังคะทุกคน',
-    authors: 'David Beckham',
-    cover: require('./img/A.png'),
-    categoryCover: require('./img/category/M.png'),
-    views: 12300,
-    likes: 1500,
-    date: new Date(2015, 5, 24)
+    author: {
+      name: 'David Beckham'
+    },
+    preview: require('./img/A.png'),
+    category: 'M',
+    viewCount: 12300,
+    likeCount: 1500,
+    createdAt: new Date(2015, 5, 24)
   },
   {
     title: 'Money Honey คุณชายหน้าตายกับยัยขี้งก',
-    authors: 'สุดสาครนอย ไทรโยค',
-    cover: require('./img/B.png'),
-    categoryCover: require('./img/category/N.png'),
-    views: 100,
-    likes: 55,
-    date: new Date(2016, 10, 8)
+    author: {
+      name: 'สุดสาครนอย ไทรโยค'
+    },
+    preview: require('./img/B.png'),
+    category: 'N',
+    viewCount: 100,
+    likeCount: 55,
+    createdAt: new Date(2016, 10, 8)
   }
 ];
 
 export const bookmark = [
   {
     title: 'Richy Rich! รวยมากนะ! รู้ยังคะทุกคน',
-    cover: require('./img/A.png'),
-    categoryCover: require('./img/category/N.png'),
+    preview: require('./img/A.png'),
+    category: 'N',
     bookmarkCount: 7
   },
   {
     title: 'Money Honey คุณชายหน้าตายกับยัยขี้งก',
-    cover: require('./img/B.png'),
-    categoryCover: require('./img/category/M.png'),
+    preview: require('./img/B.png'),
+    category: 'M',
     bookmarkCount: 3
   }
 ];

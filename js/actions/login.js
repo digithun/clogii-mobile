@@ -91,6 +91,7 @@ async function _logInWithFacebook(source: ?string): Promise<Array<Action>> {
 const signUp = (email: string, password: string) => dispatch => {
   const user = new Parse.User();
   user.set('username', email);
+  user.set('name', email);
   user.set('password', password);
   user.set('email', email);
   user.set('birthDayDate', null);
@@ -109,7 +110,7 @@ async function _linkFacebook(user) {
   await new Promise((resolve, reject) => {
     Parse.FacebookUtils.link(user, null, {
       success: () => resolve(),
-      error: error => reject(error)
+      error: (user, error) => reject(error.error)
     });
   });
   await user.save();

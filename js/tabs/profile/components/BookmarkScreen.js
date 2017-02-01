@@ -11,16 +11,17 @@ import {
 import PureListView from '../../../common/PureListView';
 import {mapSource} from '../../../common/utils';
 
-import CircleImageWithCategory from './CircleImageWithCategory';
+import CircleImageWithCategory from '../../../common/CircleImageWithCategory';
 import NavBar from './NavBar';
-import {styles as commonStyles, colors} from '../common';
+import {styles as commonStyles} from '../common';
+import {colors} from '../../../common/styles';
 
 const rightArrow = require('../img/icons/rightGreyArrow.png');
 
 const BookmarkRow = props => (<TouchableOpacity style={styles.rowContainer}>
   <CircleImageWithCategory
-    source={mapSource(props.cover)}
-    categorySource={mapSource(props.categoryCover)}
+    source={mapSource(props.preview)}
+    category={props.category}
     size={100}
   />
   <View style={{flex: 1, paddingLeft: 10}}>
@@ -56,7 +57,7 @@ class BookmarkScreen extends React.Component {
   render() {
     return (<View style={commonStyles.listViewContainer}>
         <NavBar title="Bookmark"
-          onLeftPress={this.props.onBackPress}
+          onBackPress={this.props.onBackPress}
           />
         <PureListView
           data={this.props.bookmark.map(

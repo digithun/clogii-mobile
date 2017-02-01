@@ -11,6 +11,8 @@ import {
   Navigator
 } from 'react-native';
 import PureListView from '../../../common/PureListView';
+import FixBugScrollViewNavigator from '../../../common/FixBugScrollViewNavigator';
+import FixBugScrollView from '../../../common/FixBugScrollView';
 import {toHumanNumber} from '../../../common/utils';
 
 import ProfileHeader from '../components/ProfileHeader';
@@ -116,7 +118,7 @@ class NavigatorProfile extends React.Component {
 
   render() {
     return (
-      <Navigator
+      <FixBugScrollViewNavigator
         ref="navigator"
         initialRoute={{page: 'profile'}}
         renderScene={this.renderScene}
@@ -139,7 +141,7 @@ class NavigatorProfile extends React.Component {
       return <ActivityScreen {...this.props} onBackPress={onBack}/>;
     }
     if (route.page === 'myclog') {
-      return <MyClogScreen {...this.props} onBackPress={onBack}/>;
+      return <MyClogScreen title="My Clog" clogs={mockData.myClogs} {...this.props} onBackPress={onBack}/>;
     }
     if (route.page === 'bookmark') {
       return <BookmarkScreen {...this.props} onBackPress={onBack}/>;
@@ -205,7 +207,7 @@ class ProfileMenuScreen extends React.Component {
       <View style={styles.container}>
         <ProfileHeader user={this.props.user}>
           <View style={styles.nameContainer}>
-            <Text style={styles.name}>
+            <Text numberOfLines={1} style={styles.name}>
               {name.toUpperCase()}
             </Text>
             <TouchableOpacity onPress={() => this.props.onEditProfile && this.props.onEditProfile()}>
@@ -227,11 +229,14 @@ class ProfileMenuScreen extends React.Component {
           </View>
         </ProfileHeader>
         <View style={styles.menuList}>
-          <PureListView
-            title="Profile"
-            data={menuList}
-            renderRow={this.renderMenu}
-          />
+          <FixBugScrollView>
+            <PureListView
+              minContentHeight={0}
+              title="Profile"
+              data={menuList}
+              renderRow={this.renderMenu}
+            />
+          </FixBugScrollView>
         </View>
         <CandyCorner candys={this.props.candys} />
       </View>
@@ -253,7 +258,7 @@ const styles = StyleSheet.create({
     flex: 1
   },
   menuList: {
-    flex: 2,
+    flex: 1,
     backgroundColor: 'white'
   },
   row: {
@@ -270,9 +275,11 @@ const styles = StyleSheet.create({
     paddingLeft: 20
   },
   nameContainer: {
+    width: 200,
     padding: 10,
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   name: {
     color: 'white',

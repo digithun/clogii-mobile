@@ -23,14 +23,17 @@
 import 'dotenv/config';
 import path from 'path';
 import express from 'express';
-import {apolloServer} from 'apollo-server';
-import {Schema} from './cloud/graphql/schema';
 import Parse from 'parse/node';
 import {ParseServer} from 'parse-server';
 import ParseDashboard from 'parse-dashboard';
+import { graphqlExpress, graphiqlExpress } from 'graphql-server-express';
+import bodyParser from 'body-parser';
 
-const SERVER_PORT = process.env.PORT || 8080;
-const SERVER_HOST = process.env.HOST || 'localhost';
+import appLink from './app-link';
+
+const SERVER_PORT = process.env.SERVER_PORT || 8080;
+const SERVER_URL = process.env.URL;
+const JAVASCRIPT_KEY = process.env.JAVASCRIPT_KEY || '';
 const APP_NAME = process.env.APP_NAME || 'clogii';
 const APP_ID = process.env.APP_ID || 'oss-f8-app-2016';
 const MASTER_KEY = process.env.MASTER_KEY || '70c6093dba5a7e55968a1c7ad3dd3e5a74ef5cac';
@@ -40,22 +43,32 @@ const DASHBOARD_AUTH = process.env.DASHBOARD_AUTH;
 const MAILGUN_FROM_ADDRESS = process.env.MAILGUN_FROM_ADDRESS || 'admin@localhost';
 const MAILGUN_DOMAIN = process.env.MAILGUN_DOMAIN || '';
 const MAILGUN_KEY = process.env.MAILGUN_KEY || '';
+const MOCK_SERVER = !!+process.env.MOCK_SERVER;
+const SERVER_PROTOCOL = process.env.SERVER_PROTOCOL || 'http';
 
 Parse.initialize(APP_ID);
-Parse.serverURL = `http://localhost:${SERVER_PORT}/parse`;
+Parse.serverURL = `${SERVER_URL}/parse`;
 Parse.masterKey = MASTER_KEY;
 Parse.Cloud.useMasterKey();
 
 function getSchema() {
   if (!IS_DEVELOPMENT) {
-    return Schema;
+    return MOCK_SERVER ? require('./cloud/graphql/mockSchema.js') : require('./cloud/graphql/schema.js');
   }
 
-  delete require.cache[require.resolve('./cloud/graphql/schema.js')];
-  return require('./cloud/graphql/schema.js').Schema;
+  if (MOCK_SERVER) {
+    delete require.cache[require.resolve('./cloud/graphql/mockSchema.js')];
+  }
+  else {
+    delete require.cache[require.resolve('./cloud/graphql/schema.js')];
+  }
+  return MOCK_SERVER ? require('./cloud/graphql/mockSchema.js') : require('./cloud/graphql/schema.js');
 }
 
 const server = express();
+
+server.use('/static', express.static(path.join(__dirname, 'static')));
+server.use('/app-link', appLink);
 
 server.use(
   '/parse',
@@ -65,8 +78,8 @@ server.use(
     appId: APP_ID,
     masterKey: MASTER_KEY,
     fileKey: 'f33fc1a9-9ba9-4589-95ca-9976c0d52cd5',
-    serverURL: `http://${SERVER_HOST}:${SERVER_PORT}/parse`,
-    publicServerURL: `http://${SERVER_HOST}:${SERVER_PORT}/parse`,
+    serverURL: `${SERVER_URL}/parse`,
+    publicServerURL: `${SERVER_URL}/parse`,
     appName: APP_NAME,
     verifyUserEmails: true,
     emailAdapter: {
@@ -101,15 +114,20 @@ if (IS_DEVELOPMENT) {
   );
 }
 
-server.use(
-  '/graphql',
-  apolloServer({
-    graphiql: IS_DEVELOPMENT,
-    pretty: IS_DEVELOPMENT,
+server.use('/graphql', bodyParser.json(), graphqlExpress(request => {
+  return {
     schema: getSchema(),
-    rootValue: Math.random(), // TODO: Check credentials, assign user
-  })
-);
+    context: {
+      request
+    }
+  };
+}));
+
+if (IS_DEVELOPMENT) {
+  server.use('/graphiql', graphiqlExpress({
+    endpointURL: '/graphql',
+  }));
+}
 
 server.use('/', (req, res) => res.redirect('/graphql'));
 

@@ -11,18 +11,6 @@ describe('BookmarkScreen', () => {
   });
 });
 
-describe('CircleImageWithCategory', () => {
-  const CircleImageWithCategory = require('../components/CircleImageWithCategory').default;
-  it('render CircleImageWithCategory', () => {
-    const tree = renderer.create(<CircleImageWithCategory
-      source={{uri: 'x.jpg'}}
-      categorySource={{uri: 'x.jpg'}}
-      size={100}
-    />);
-    expect(tree.toJSON()).toMatchSnapshot();
-  });
-});
-
 describe('JellyShopScreen', () => {
   const JellyShopScreen = require('../components/JellyShopScreen').default;
   it('render JellyShopScreen', () => {
@@ -31,23 +19,10 @@ describe('JellyShopScreen', () => {
   });
 });
 
-describe('ModalSpinner', () => {
-  const ModalSpinner = require('../components/ModalSpinner').default;
-  it('render visible', () => {
-    const tree = renderer.create(<ModalSpinner visible={true}/>);
-    expect(tree.toJSON()).toMatchSnapshot();
-  });
-
-  it('render invisible', () => {
-    const tree = renderer.create(<ModalSpinner visible={false}/>);
-    expect(tree.toJSON()).toMatchSnapshot();
-  });
-});
-
 describe('MyClogScreen', () => {
   const MyClogScreen = require('../components/MyClogScreen').default;
   it('render MyClogScreen', () => {
-    const tree = renderer.create(<MyClogScreen myClogs={mockMyClogs}/>);
+    const tree = renderer.create(<MyClogScreen clogs={mockMyClogs}/>);
     expect(tree.toJSON()).toMatchSnapshot();
   });
 });

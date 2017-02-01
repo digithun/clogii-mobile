@@ -9,38 +9,36 @@ import {
   Image
 } from 'react-native';
 
-import {colors} from '../common';
+import {NavBarWithPinkButton} from '../../../common/NavBar';
 
-const NAV_BAR_HEIGHT = 60;
+import {colors} from '../../../common/styles';
 
 export default class NavBar extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
-        <TouchableOpacity style={styles.leftMenu} onPress={() => this.props.onLeftPress && this.props.onLeftPress()}>
-          <Image style={styles.backButton} source={require('../img/icons/backButton.png')}/>
-        </TouchableOpacity>
-        <View style={styles.midMenu}>
-          <Text style={styles.navText}>{this.props.title}</Text>
-        </View>
-        <TouchableOpacity style={styles.rightMenu} onPress={() => this.props.onRightPress && this.props.onRightPress()}>
-          {
-            this.props.renderRightMenu ? this.props.renderRightMenu() : null
-          }
-        </TouchableOpacity>
-      </View>
+      <NavBarWithPinkButton
+        containerStyle={styles.container}
+        renderRightMenu={this.renderRightMenu.bind(this)}
+        title={this.props.title}
+        titleTextStyle={styles.titleText}
+        {...this.props}
+        />
+    );
+  }
+
+  renderRightMenu() {
+    return (
+      <TouchableOpacity style={styles.rightMenu} onPress={this.props.onRightPress}>
+        {
+          this.props.renderRightMenu ? this.props.renderRightMenu() : null
+        }
+      </TouchableOpacity>
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 5,
-    height: NAV_BAR_HEIGHT,
-    backgroundColor: 'white',
-    justifyContent: 'space-between',
-    flexDirection: 'row',
-    alignItems: 'center',
     borderBottomWidth: 1,
     borderColor: colors.greyBorder
   },
@@ -48,20 +46,9 @@ const styles = StyleSheet.create({
     height: 20,
     resizeMode: 'contain'
   },
-  midMenu: {
-    alignItems: 'center'
-  },
-  leftMenu: {
-    paddingLeft: 20,
-    alignItems: 'flex-start'
-  },
-  rightMenu: {
-    paddingRight: 20,
-    alignItems: 'flex-end'
-  },
-  navText: {
+  titleText: {
     fontSize: 22,
     fontWeight: 'bold',
-    color: 'rgb(209, 87, 92)'
+    color: colors.textPink
   }
 });

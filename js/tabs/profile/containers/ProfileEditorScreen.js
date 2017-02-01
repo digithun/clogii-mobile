@@ -1,29 +1,30 @@
 import React from 'react';
-
 import {
   Image,
   Text,
   View,
   StyleSheet,
   TouchableOpacity,
-  TextInput,
-  Switch
+  Switch,
+  Alert,
+  InteractionManager
 } from 'react-native';
 import moment from 'moment';
 import Picker from 'react-native-picker';
 import ImagePicker from 'react-native-image-picker';
+import {connect} from 'react-redux';
 
 import {changePublicProfile} from '../../../actions/changeProfile';
 import {linkFacebook, unlinkFacebook} from '../../../actions/login';
 
 import NavBar from '../components/NavBar';
-import {styles as commonStyles, colors as commonColors} from '../common';
+import {styles as commonStyles} from '../common';
+import {colors as commonColors} from '../../../common/styles';
 
 import ProfileHeader from '../components/ProfileHeader';
 import DatePickerDialog from '../components/DatePickerDialog';
-import ModalSpinner from '../components/ModalSpinner';
-
-import {connect} from 'react-redux';
+import ModalSpinner from '../../../common/ModalSpinner';
+import TextInput from '../../../common/TextInput';
 
 export const OKButton = () => (<Image
       source={require('../img/icons/ok.png')}
@@ -55,7 +56,7 @@ class ProfileEditorScreen extends React.Component {
       <NavBar
         title="แก้ไขข้อมูล"
         renderRightMenu={OKButton}
-        onLeftPress={this.props.onBackPress}
+        onBackPress={this.props.onBackPress}
         onRightPress={() => {
           this.setState({
             savingProfile: true
@@ -66,6 +67,10 @@ class ProfileEditorScreen extends React.Component {
                 savingProfile: false
               });
               this.props.onBackPress && this.props.onBackPress();
+            }).catch(error => {
+              Alert.alert("Error", error.message, [
+                { text: "OK", onPress: () => this.setState({ savingProfile: false}) }
+              ]);
             });
         }}
         />
@@ -149,6 +154,10 @@ class ProfileEditorScreen extends React.Component {
         this.setState({
           linkingFacebook: false
         });
+      }).catch(error => {
+        Alert.alert("Error", error.message, [
+          { text: "OK", onPress: () => this.setState({ linkingFacebook: false}) }
+        ]);
       });
     }
     else {
@@ -156,6 +165,10 @@ class ProfileEditorScreen extends React.Component {
         this.setState({
           linkingFacebook: false
         });
+      }).catch(error => {
+        Alert.alert("Error", error.message, [
+          { text: "OK", onPress: () => this.setState({ linkingFacebook: false}) }
+        ]);
       });
     }
   }
@@ -167,6 +180,9 @@ class ProfileEditorScreen extends React.Component {
           this.setState({
             changedProfilePicture: response
           });
+        }
+        if (response.error) {
+          Alert.alert("Error", response.error);
         }
         resolve();
       });
@@ -180,6 +196,9 @@ class ProfileEditorScreen extends React.Component {
           this.setState({
             changedProfileCover: response
           });
+        }
+        if (response.error) {
+          Alert.alert("Error", response.error);
         }
         resolve();
       });
