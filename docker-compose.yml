@@ -18,7 +18,7 @@ db:
     volumes_from:
         - mongo-data
     ports:
-        - "27017:27017"
+        - "27018:27017"
     command: "--smallfiles --logpath=/dev/null --setParameter failIndexKeyTooLong=false"
     
 mongo-data:
