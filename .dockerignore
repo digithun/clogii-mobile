@@ -1,0 +1,13 @@
+.idea
+.next
+.vscode
+db
+docs
+static
+build
+dist
+node_modules/
+.env
+ios
+android
+js

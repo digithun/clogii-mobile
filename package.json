@@ -12,7 +12,10 @@
     "dev": "npm run dev:db && npm run start:watch",
     "dev:db": ". ./scripts/dev-db",
     "gen-mock": "babel-node ./scripts/gen-mock-data.js",
-    "clean-db": "babel-node ./scripts/clean-db.js"
+    "clean-db": "babel-node ./scripts/clean-db.js",
+    "build-server": "babel -d ./.dist --ignore static ./server -s",
+    "build": "sh ./.bin/build.sh",
+    "up": "node ./.dist/server.js"
   },
   "dependencies": {
     "@exponent/react-native-read-more-text": "^1.0.0",
@@ -60,7 +63,7 @@
     "react-native-fs": "2.0.1-rc.2",
     "react-native-image-picker": "^0.24.1",
     "react-native-linear-gradient": "^1.6.2",
-    "react-native-modal-picker": "git+ssh://git@github.com/atennapel/react-native-modal-picker.git",
+    "react-native-modal-picker": "git+https://github.com/atennapel/react-native-modal-picker.git",
     "react-native-push-notification": "^2.2.0",
     "react-native-scrollable-tab-view": "^0.7.0",
     "react-native-send-intent": "^1.0.14",

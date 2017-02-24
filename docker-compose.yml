@@ -1,0 +1,28 @@
+server:
+    image: clogii-mobile-server
+    ports:
+        - "8080:8080"
+    environment: 
+        URL: http://localhost:8080
+        DATABASE_URI: "db"
+        APP_ID: UjMJZo7zGIRTXuKG8wbhlqQlCQkrHqAK8CGvn4Gr
+        MAILGUN_DOMAIN: mailgun.domain
+        MAILGUN_KEY: mailgunkey
+        MOCK_SERVER: 1
+        JAVASCRIPT_KEY: v2JMFwwOGNvsCRjHUWXcxgTv4RxnyArjz9G3DK8D
+    links:
+        - db
+
+db:
+    image: mongo:3.0.8
+    volumes_from:
+        - mongo-data
+    ports:
+        - "27017:27017"
+    command: "--smallfiles --logpath=/dev/null --setParameter failIndexKeyTooLong=false"
+    
+mongo-data:
+    image: mongo:3.0.8
+    volumes: 
+        - ./db/:/data/db
+    command: "--break-mongo" # break mongod cmd from running and use this container as data container
