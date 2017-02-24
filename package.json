@@ -15,7 +15,7 @@
     "clean-db": "babel-node ./scripts/clean-db.js",
     "build-server": "babel -d ./.dist --ignore static ./server -s",
     "build": "sh ./.bin/build.sh",
-    "up": "node ./.dist/server.js"
+    "up": "NODE_ENV=production node ./.dist/server.js"
   },
   "dependencies": {
     "@exponent/react-native-read-more-text": "^1.0.0",
