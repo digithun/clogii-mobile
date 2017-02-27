@@ -14,7 +14,10 @@
     "gen-mock": "babel-node ./scripts/gen-mock-data.js",
     "clean-db": "babel-node ./scripts/clean-db.js",
     "build-server": "BABEL_ENV=es babel -d ./.dist --ignore static ./server -s",
-    "up": "IS_ENABLE_GRAPHQL=TRUE NODE_ENV=production node --harmony ./.dist/server.js"
+    "up": "NODE_ENV=production node --harmony ./.dist/server.js",
+    "alpha": "sh ./.bin/alpha.sh",
+    "alpha-up": "IS_ENABLE_GRAPHQL=TRUE NODE_ENV=production forever start ./.dist/server.js",
+    "alpha-down": "forever stop ./.dist/server.js"
   },
   "dependencies": {
     "@exponent/react-native-read-more-text": "^1.0.0",
