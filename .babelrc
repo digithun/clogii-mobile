@@ -1,7 +1,27 @@
 {
-  "passPerPreset": true,
-  "presets": [
-    {},
-    "react-native"
-  ]
+	"env": {
+		"development": {
+		  "passPerPreset": true,
+		  "presets": [
+		    {},
+		    "react-native"
+		  ]
+		},
+		"es": {
+	      "presets": [
+	        ["es2015", {"modules": false}],
+	        {"plugins": [ "transform-runtime" ] },
+	        "react-native"
+	      ],
+	      "plugins": [
+	        "syntax-async-functions",
+	        ["transform-regenerator", {
+	            "async": false
+	        }],
+	        "transform-class-properties",
+	        "transform-object-rest-spread",
+	        "transform-flow-strip-types",
+	      ]
+	    }
+	}
 }
