@@ -4,6 +4,9 @@ import android.app.Application;
 import android.util.Log;
 
 import com.facebook.react.ReactApplication;
+import com.evollu.react.fa.FIRAnalyticsPackage;
+import com.evollu.react.fcm.FIRMessagingPackage;
+import com.BV.LinearGradient.LinearGradientPackage;
 import com.rnfs.RNFSPackage;
 import com.lugg.ReactNativeConfig.ReactNativeConfigPackage;
 import com.imagepicker.ImagePickerPackage;
@@ -57,6 +60,9 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
       new MainReactPackage(),
+            new FIRAnalyticsPackage(),
+            new FIRMessagingPackage(),
+            new LinearGradientPackage(),
             new RNFSPackage(),
             new ReactNativeConfigPackage(),
             new ImagePickerPackage(),
@@ -64,8 +70,7 @@ public class MainApplication extends Application implements ReactApplication {
       new LinearGradientPackage(),
       new RNSharePackage(),
       new RNSendIntentPackage(),
-      new CodePush("qwfkzzq7Y8cSrkiuU7aRCkIP7XYLEJ6b-AFoe", MainApplication.this, BuildConfig.DEBUG),
-      new ReactNativePushNotificationPackage()
+      new CodePush("qwfkzzq7Y8cSrkiuU7aRCkIP7XYLEJ6b-AFoe", MainApplication.this, BuildConfig.DEBUG)
       );
     }
   };

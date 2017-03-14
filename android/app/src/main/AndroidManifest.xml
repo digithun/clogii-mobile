@@ -1,15 +1,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.clogii.clog">
-    <permission
-        android:name="com.clogii.clog.permission.C2D_MESSAGE"
-        android:protectionLevel="signature" />
-    <uses-permission android:name="com.clogii.clog.permission.C2D_MESSAGE" />
+
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 
     <!-- Coming from React Native -->
     <uses-permission android:name="android.permission.READ_PHONE_STATE" tools:node="remove" />
@@ -25,32 +21,32 @@
       android:label="@string/app_name"
       android:icon="@mipmap/ic_launcher"
       android:largeHeap="true"
-      android:theme="@style/AppTheme">
-      <receiver
-        android:name="com.google.android.gms.gcm.GcmReceiver"
-        android:exported="true"
-        android:permission="com.google.android.c2dm.permission.SEND">
+      android:theme="@style/AppTheme"
+      android:launchMode="singleTop">
+      
+      <!-- FCM -->
+      <service android:name="com.evollu.react.fcm.MessagingService" android:enabled="true" android:exported="true">
         <intent-filter>
-          <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-          <category android:name="com.clogii.clog" />
+          <action android:name="com.google.firebase.MESSAGING_EVENT"/>
         </intent-filter>
-      </receiver>
-
-      <receiver android:name="com.dieam.reactnativepushnotification.modules.RNPushNotificationPublisher" />
-      <receiver android:name="com.dieam.reactnativepushnotification.modules.RNPushNotificationBootEventReceiver">
-        <intent-filter>
-          <action android:name="android.intent.action.BOOT_COMPLETED" />
-        </intent-filter>
-      </receiver>
-
-      <service android:name="com.dieam.reactnativepushnotification.modules.RNPushNotificationRegistrationService" />
-      <service
-          android:name="com.dieam.reactnativepushnotification.modules.RNPushNotificationListenerService"
-          android:exported="false" >
-          <intent-filter>
-            <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-          </intent-filter>
       </service>
+
+      <service android:name="com.evollu.react.fcm.InstanceIdService" android:exported="false">
+        <intent-filter>
+          <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+        </intent-filter>
+      </service>
+
+      <receiver android:name="com.evollu.react.fcm.FIRLocalMessagingPublisher"/>
+      <receiver android:enabled="true" android:exported="true"  android:name="com.evollu.react.fcm.FIRSystemBootEventReceiver">
+          <intent-filter>
+              <action android:name="android.intent.action.BOOT_COMPLETED"/>
+              <action android:name="android.intent.action.QUICKBOOT_POWERON"/>
+              <action android:name="com.htc.intent.action.QUICKBOOT_POWERON"/>
+              <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+      </receiver>
+      <!-- FCM end -->
 
       <activity
         android:name=".MainActivity"
@@ -67,7 +63,14 @@
           <category android:name="android.intent.category.BROWSABLE" />
           <data android:scheme="clogii" android:host="player"/>
         </intent-filter>
+
+        <intent-filter>
+          <action android:name="fcm.ACTION.CLOGII" />
+          <category android:name="android.intent.category.DEFAULT" />
+        </intent-filter>
+
       </activity>
+
       <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
       <activity android:name="com.facebook.FacebookActivity"
           android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"

@@ -13,12 +13,38 @@ PODS:
     - React
   - CodePush/SSZipArchive (1.16.1):
     - React
-  - FBSDKCoreKit (4.17.0):
+  - FBSDKCoreKit (4.20.1):
     - Bolts (~> 1.7)
-  - FBSDKLoginKit (4.17.0):
+  - FBSDKLoginKit (4.20.1):
     - FBSDKCoreKit
-  - FBSDKShareKit (4.17.0):
+  - FBSDKShareKit (4.20.1):
     - FBSDKCoreKit
+  - Firebase/Analytics (3.14.0):
+    - Firebase/Core
+  - Firebase/Core (3.14.0):
+    - FirebaseAnalytics (= 3.7.0)
+    - FirebaseCore (= 3.5.1)
+  - Firebase/Messaging (3.14.0):
+    - Firebase/Core
+    - FirebaseMessaging (= 1.2.2)
+  - FirebaseAnalytics (3.7.0):
+    - FirebaseCore (~> 3.5)
+    - FirebaseInstanceID (~> 1.0)
+    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
+  - FirebaseCore (3.5.1):
+    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
+  - FirebaseInstanceID (1.0.9)
+  - FirebaseMessaging (1.2.2):
+    - FirebaseAnalytics (~> 3.7)
+    - FirebaseInstanceID (~> 1.0)
+    - GoogleToolboxForMac/Logger (~> 2.1)
+    - Protobuf (~> 3.1)
+  - GoogleToolboxForMac/Defines (2.1.1)
+  - GoogleToolboxForMac/Logger (2.1.1):
+    - GoogleToolboxForMac/Defines (= 2.1.1)
+  - GoogleToolboxForMac/NSData+zlib (2.1.1):
+    - GoogleToolboxForMac/Defines (= 2.1.1)
+  - Protobuf (3.2.0)
   - React (0.38.1):
     - React/Core (= 0.38.1)
   - react-native-fbsdk/Core (0.4.0):
@@ -53,6 +79,8 @@ PODS:
 
 DEPENDENCIES:
   - CodePush (from `../node_modules/react-native-code-push`)
+  - Firebase/Analytics
+  - Firebase/Messaging
   - react-native-fbsdk/Core (from `../node_modules/react-native-fbsdk/iOS`)
   - react-native-fbsdk/Login (from `../node_modules/react-native-fbsdk/iOS`)
   - react-native-fbsdk/Share (from `../node_modules/react-native-fbsdk/iOS`)
@@ -78,12 +106,19 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   CodePush: f52903ecd1a17593a0c7c10aa55ecd3912d20e73
-  FBSDKCoreKit: 30a21d2d7b92984b3d80497113433c00824c35e9
-  FBSDKLoginKit: 42b7129ac0373ca99eaf4cbebf4d07bd42371f59
-  FBSDKShareKit: 9b573d03fbee36cbaf42d5bb1f2bc019e0d72347
+  FBSDKCoreKit: 39a3569652983bf8666620dd334804c9057ae9b2
+  FBSDKLoginKit: 17092ff61a18c54ca423aebc18c5acc2e5a4a728
+  FBSDKShareKit: 4f37934d9ee9500d2d35752595816dc35f967478
+  Firebase: 85a581fb04e44f63ae9f4fbc8d6dabf4a4c18653
+  FirebaseAnalytics: 0d1b7d81d5021155be37702a94ba1ec16d45365d
+  FirebaseCore: 225d40532489835a034b8f4e2c9c87fbf4f615a2
+  FirebaseInstanceID: 2d0518b1378fe9d685ef40cbdd63d2fdc1125339
+  FirebaseMessaging: df8267f378580a24174ce7861233aa11d5c90109
+  GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
+  Protobuf: 745f59e122e5de98d4d7ef291e264a0eef80f58e
   React: 2c6b27dcaea89b3d3398df8b598330fd18abbe46
   react-native-fbsdk: 36286e05caf242c82bf91c7dd8c1694fd5040212
 
-PODFILE CHECKSUM: d768d1fa2a1f4212ac58b500a93cfef892eebaf1
+PODFILE CHECKSUM: a499229aef40c6327b733cb973082b0850a66cf8
 
-COCOAPODS: 1.2.0.beta.3
+COCOAPODS: 1.2.0

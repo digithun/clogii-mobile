@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1084029871418",
+    "firebase_url": "https://clogii-mobile.firebaseio.com",
+    "project_id": "clogii-mobile",
+    "storage_bucket": "clogii-mobile.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1084029871418:android:071789e897147b7d",
+        "android_client_info": {
+          "package_name": "com.clogii.clog"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1084029871418-goahp664is4agdr51h1vro0qta77l5pi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD9U9mfdR0pyH-BCQ_jIzwnoEB7gcJUZlo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

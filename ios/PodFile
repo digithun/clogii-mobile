@@ -1,6 +1,10 @@
 source 'https://github.com/CocoaPods/Specs.git'
 
 target 'Clogii' do
+  pod 'Firebase', :subspecs => [
+    'Analytics',
+    'Messaging'
+  ]
   pod 'React', :subspecs => [
     'ART',
     'Core',
@@ -9,7 +13,6 @@ target 'Clogii' do
     'RCTNetwork',
     'RCTText',
     'RCTWebSocket',
-    'RCTPushNotification',
     'RCTLinkingIOS',
     'RCTVibration',
   ], :path => '../node_modules/react-native'
