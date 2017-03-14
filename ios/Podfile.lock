@@ -80,6 +80,7 @@ PODS:
 DEPENDENCIES:
   - CodePush (from `../node_modules/react-native-code-push`)
   - Firebase/Analytics
+  - Firebase/Core
   - Firebase/Messaging
   - react-native-fbsdk/Core (from `../node_modules/react-native-fbsdk/iOS`)
   - react-native-fbsdk/Login (from `../node_modules/react-native-fbsdk/iOS`)
@@ -119,6 +120,6 @@ SPEC CHECKSUMS:
   React: 2c6b27dcaea89b3d3398df8b598330fd18abbe46
   react-native-fbsdk: 36286e05caf242c82bf91c7dd8c1694fd5040212
 
-PODFILE CHECKSUM: a499229aef40c6327b733cb973082b0850a66cf8
+PODFILE CHECKSUM: 14c423bb61971047557c0ac321e1f83e5f37601e
 
 COCOAPODS: 1.2.0
