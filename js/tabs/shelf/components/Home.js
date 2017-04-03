@@ -85,7 +85,7 @@ class Home extends React.Component {
           }}
         />
         <FixBugScrollView>
-          {/*<Image source={require('../../../assets/shelf/home-bg-1.png')} style={{ width: undefined, height: 700, resizeMode: 'stretch', backgroundColor: 'transparent' }}>
+          <Image source={require('../../../assets/shelf/home-bg-1.png')} style={{ width: undefined, height: 700, resizeMode: 'stretch', backgroundColor: 'transparent' }}>
             <View style={{ flex: 2 }}>
               <HeroBanner goToBook={this.props.goToBook} clogs={this.props.heroBanners} />
             </View>
@@ -96,7 +96,6 @@ class Home extends React.Component {
               <RecommendedClog clog={this.props.recommendedClog} goToBook={this.props.goToBook} />
             </View>
           </Image>
-          */}
           <Image source={require('../../../assets/shelf/home-bg-1.5.png')} style={{ resizeMode: 'stretch', backgroundColor: 'transparent', width: undefined, height: undefined, paddingTop: 20 }}>
             {
               this.props.favoriteTags.map(tag => (
