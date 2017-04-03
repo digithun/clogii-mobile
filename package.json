@@ -1,6 +1,6 @@
 {
   "name": "Clogii",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
     "start": "babel-node ./server/server.js",
@@ -16,7 +16,8 @@
     "remove-seed": "babel-node ./scripts/seeds/remove.js",
     "re-gen-seed": "npm run gen-seed && npm run remove-seed && npm run import-seed",
     "seed-episode-binary": "babel-node ./scripts/seeds/seed-episode-binary.js",
-    "clean-db": "babel-node ./scripts/clean-db.js"
+    "clean-db": "babel-node ./scripts/clean-db.js",
+    "release": "standard-version"
   },
   "dependencies": {
     "@exponent/react-native-read-more-text": "^1.0.0",
@@ -31,6 +32,7 @@
     "crc32": "~0.2.2",
     "dotenv": "^4.0.0",
     "ejs": "^2.5.5",
+    "eventbus": "^0.0.3",
     "express": "~4.14.0",
     "express-graphql": "^0.6.3",
     "fbjs": "^0.8.8",
@@ -91,6 +93,7 @@
     "babel-jest": "^18.0.0",
     "babel-polyfill": "^6.20.0",
     "babel-preset-es2015": "^6.18.0",
+    "cz-conventional-changelog": "^2.0.0",
     "enzyme": "^2.7.0",
     "enzyme-to-json": "^1.4.5",
     "eslint": "^3.15.0",
@@ -103,7 +106,8 @@
     "react-addons-test-utils": "^15.4.1",
     "react-test-renderer": "^15.4.1",
     "redux-mock-store": "^1.2.1",
-    "remote-redux-devtools": "^0.5.7"
+    "remote-redux-devtools": "^0.5.7",
+    "standard-version": "^4.0.0"
   },
   "jest": {
     "haste": {
@@ -128,5 +132,10 @@
   "engines": {
     "node": ">=5.0",
     "npm": ">=3.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
